@@ -3,7 +3,6 @@ module github.com/allinbits/modules/demo-apps/auth-chain
 go 1.15
 
 require (
-	github.com/allinbits/modules/poa v0.0.0-20201006081502-d144cbfb0613
 	github.com/allinbits/modules/x/poa v0.0.0-20201009193500-337b33a517b1
 	github.com/cosmos/cosmos-sdk v0.39.1
 	github.com/golang/mock v1.4.3 // indirect
