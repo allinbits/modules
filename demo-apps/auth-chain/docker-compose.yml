@@ -1,0 +1,82 @@
+version: "3"
+
+services:
+  auth-chaindnode0:
+    container_name: auth-chaindnode0
+    image: "poa"
+    ports:
+      - "26656-26657:26656-26657"
+      - "1317:1317"
+      - "9090:9090"
+      - "40000:40000"
+    environment:
+      - ID=0
+      - LOG=${LOG:-auth-chaind.log}
+    volumes:
+      - ./build/.auth-chaind:/root/.auth-chaind
+      - ./build/validator:/root/validator
+    command: ["sh", "-c", "dlv --listen=:40000 --headless --accept-multiclient exec --continue ./auth-chaind -- start --home /root/.auth-chaind"]
+    networks:
+      localnet:
+        ipv4_address: 192.16.10.2
+
+  auth-chaindnode1:
+    container_name: auth-chaindnode1
+    image: "poa"
+    ports:
+      - "26666-26667:26656-26657"
+      - "1318:1317"
+      - "9091:9090"
+    environment:       
+      - NODE0ADDRESS=${NODE0ADDRESS}
+      - ID=1
+      - LOG=${LOG:-auth-chaind.log}
+    command: ["sh", "-c", "auth-chaind init ac1 && cp genesis.json /root/.authchaind/config && sed -i 's/peers = \"\"/peers = \"$NODE0ADDRESS\"/g' /root/.authchaind/config/config.toml && auth-chaind start"]
+    volumes:
+      - ./build/.auth-chaind/config/genesis.json:/auth-chain/genesis.json
+    networks:
+      localnet:
+        ipv4_address: 192.16.10.3
+
+  auth-chaindnode2:
+    container_name: auth-chaindnode2
+    image: "poa"
+    ports:
+      - "26676-26677:26656-26657"
+      - "1319:1317"
+      - "9092:9090"
+    environment:       
+      - NODE0ADDRESS=${NODE0ADDRESS}
+      - ID=1
+      - LOG=${LOG:-auth-chaind.log}
+    command: ["sh", "-c", "auth-chaind init ac2 && cp genesis.json /root/.authchaind/config && sed -i 's/peers = \"\"/peers = \"$NODE0ADDRESS\"/g' /root/.authchaind/config/config.toml && auth-chaind start"]
+    volumes:
+      - ./build/.auth-chaind/config/genesis.json:/auth-chain/genesis.json
+    networks:
+      localnet:
+        ipv4_address: 192.16.10.4
+
+  auth-chaindnode3:
+    container_name: auth-chaindnode3
+    image: "poa"
+    ports:
+      - "26686-26687:26656-26657"
+      - "1320:1317"
+      - "9093:9090"
+    environment:       
+      - NODE0ADDRESS=${NODE0ADDRESS}
+      - ID=1
+      - LOG=${LOG:-auth-chaind.log}
+    command: ["sh", "-c", "auth-chaind init ac3 && cp genesis.json /root/.authchaind/config && sed -i 's/peers = \"\"/peers = \"$NODE0ADDRESS\"/g' /root/.authchaind/config/config.toml && auth-chaind start"]
+    volumes:
+      - ./build/.auth-chaind/config/genesis.json:/auth-chain/genesis.json
+    networks:
+      localnet:
+        ipv4_address: 192.16.10.5
+
+networks:
+  localnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.16.10.0/16
