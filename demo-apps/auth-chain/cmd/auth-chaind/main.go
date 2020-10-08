@@ -15,6 +15,8 @@ import (
 
 	"github.com/allinbits/modules/demo-apps/auth-chain/app"
 
+	"github.com/allinbits/modules/x/poa"
+	poacli "github.com/allinbits/modules/x/poa/client/cli"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client/debug"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -23,7 +25,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
 	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
-	"github.com/cosmos/cosmos-sdk/x/staking"
 )
 
 const flagInvCheckPeriod = "inv-check-period"
@@ -44,11 +45,11 @@ func main() {
 	}
 
 	rootCmd.AddCommand(genutilcli.InitCmd(ctx, cdc, app.ModuleBasics, app.DefaultNodeHome))
-	rootCmd.AddCommand(genutilcli.CollectGenTxsCmd(ctx, cdc, auth.GenesisAccountIterator{}, app.DefaultNodeHome))
+	rootCmd.AddCommand(poacli.CollectGenTxsCmd(ctx, cdc, auth.GenesisAccountIterator{}, app.DefaultNodeHome))
 	rootCmd.AddCommand(genutilcli.MigrateGenesisCmd(ctx, cdc))
 	rootCmd.AddCommand(
-		genutilcli.GenTxCmd(
-			ctx, cdc, app.ModuleBasics, staking.AppModuleBasic{},
+		poacli.GenTxCmd(
+			ctx, cdc, app.ModuleBasics, poa.AppModuleBasic{},
 			auth.GenesisAccountIterator{}, app.DefaultNodeHome, app.DefaultCLIHome,
 		),
 	)
