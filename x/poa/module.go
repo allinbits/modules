@@ -11,10 +11,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/allinbits/modules/poa/client/cli"
-	"github.com/allinbits/modules/poa/client/rest"
-	"github.com/allinbits/modules/poa/keeper"
-	"github.com/allinbits/modules/poa/types"
+	"github.com/allinbits/modules/x/poa/client/cli"
+	"github.com/allinbits/modules/x/poa/client/rest"
+	"github.com/allinbits/modules/x/poa/keeper"
+	"github.com/allinbits/modules/x/poa/types"
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/codec"

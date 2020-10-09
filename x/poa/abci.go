@@ -1,7 +1,7 @@
 package poa
 
 import (
-	"github.com/allinbits/modules/poa/keeper"
+	"github.com/allinbits/modules/x/poa/keeper"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 )

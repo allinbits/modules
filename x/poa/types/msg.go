@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/allinbits/modules/poa/msg"
+	"github.com/allinbits/modules/x/poa/msg"
 )
 
 // This is a work around to allow messages to be defined in another package

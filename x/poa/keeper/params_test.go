@@ -4,7 +4,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"testing"
 
-	"github.com/allinbits/modules/poa/types"
+	"github.com/allinbits/modules/x/poa/types"
 )
 
 func TestKeeperParamsFunctions(t *testing.T) {
