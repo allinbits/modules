@@ -11,7 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	// sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/allinbits/modules/poa/types"
+	"github.com/allinbits/modules/x/poa/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

@@ -1,7 +1,7 @@
 package poa
 
 import (
-	"github.com/allinbits/modules/poa/msg"
+	"github.com/allinbits/modules/x/poa/msg"
 	"github.com/cosmos/cosmos-sdk/codec"
 )
 

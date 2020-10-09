@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/allinbits/modules/poa/keeper"
-	"github.com/allinbits/modules/poa/msg"
-	"github.com/allinbits/modules/poa/types"
+	"github.com/allinbits/modules/x/poa/keeper"
+	"github.com/allinbits/modules/x/poa/msg"
+	"github.com/allinbits/modules/x/poa/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
