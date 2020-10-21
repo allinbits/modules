@@ -15,11 +15,11 @@ import (
 )
 
 func TestQueryValidatorPOA(t *testing.T) {
-	ctx, keeper := keeper.MakeTestCtxAndKeeper(t)
+	ctx, k := keeper.MakeTestCtxAndKeeper(t)
 	var cdc = codec.New()
 
 	name := "name"
-	valPubKey := MakeTestPubKey(SamplePubKey)
+	valPubKey := keeper.MakeTestPubKey(keeper.SamplePubKey)
 	valAddr := sdk.ValAddress(valPubKey.Address().Bytes())
 
 	validator := types.NewValidator(
@@ -29,7 +29,7 @@ func TestQueryValidatorPOA(t *testing.T) {
 		stakingtypes.Description{"nil", "nil", "nil", "nil", "nil"},
 	)
 
-	keeper.SetValidator(ctx, name, validator)
+	k.SetValidator(ctx, name, validator)
 
 	bz, _ := cdc.MarshalJSON(types.NewQueryValidatorParams(name))
 
@@ -38,16 +38,16 @@ func TestQueryValidatorPOA(t *testing.T) {
 		Data: bz,
 	}
 
-	_, err := queryValidator(ctx, query, keeper)
+	_, err := queryValidator(ctx, query, k)
 	require.NoError(t, err)
 }
 
 func TestQueryVote(t *testing.T) {
-	ctx, keeper := keeper.MakeTestCtxAndKeeper(t)
+	ctx, k := keeper.MakeTestCtxAndKeeper(t)
 	var cdc = codec.New()
 
 	name := "name"
-	valPubKey := MakeTestPubKey(SamplePubKey)
+	valPubKey := keeper.MakeTestPubKey(keeper.SamplePubKey)
 	valAddr := sdk.ValAddress(valPubKey.Address().Bytes())
 	accAddr := sdk.AccAddress(valPubKey.Address().Bytes())
 
@@ -58,10 +58,10 @@ func TestQueryVote(t *testing.T) {
 		stakingtypes.Description{"nil", "nil", "nil", "nil", "nil"},
 	)
 
-	keeper.SetValidator(ctx, name, validator)
+	k.SetValidator(ctx, name, validator)
 
 	msg := msg.NewMsgVoteValidator(name, valAddr, true, accAddr)
-	handleMsgVoteValidator(ctx, msg, keeper)
+	handleMsgVoteValidator(ctx, msg, k)
 
 	bz, _ := cdc.MarshalJSON(types.NewQueryVoteParams(name, valAddr.String()))
 
@@ -70,6 +70,6 @@ func TestQueryVote(t *testing.T) {
 		Data: bz,
 	}
 
-	_, err := queryVote(ctx, query, keeper)
+	_, err := queryVote(ctx, query, k)
 	require.NoError(t, err)
 }
